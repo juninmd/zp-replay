@@ -1,0 +1,27 @@
+[package]
+name = "hldemo"
+version = "0.3.0" # remember to update html_root_url
+authors = ["Ivan Molodetskikh <yalterz@gmail.com>"]
+description = "A parser for Half-Life (Goldsource) demo files using nom."
+license = "MIT/Apache-2.0"
+
+readme = "README.md"
+documentation = "https://docs.rs/hldemo"
+repository = "https://github.com/YaLTeR/hldemo-rs"
+keywords = ["half-life", "goldsource", "demo", "nom", "parser"]
+categories = ["game-engines", "games", "parser-implementations", "parsing"]
+
+[badges]
+travis-ci = { repository = "YaLTeR/hldemo-rs" }
+appveyor = { repository = "YaLTeR/hldemo-rs" }
+
+[dependencies]
+error-chain = "0.12"
+quick-error = "1"
+
+[dependencies.nom]
+version = "4"
+features = ["verbose-errors"]
+
+[dev-dependencies]
+memmap = "0.6"

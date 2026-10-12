@@ -1,0 +1,8 @@
+crate/target/
+web/zp_replay_wasm.wasm
+node_modules/
+local-maps/
+web/map-app.js
+*.png
+local-replays/
+vendor/hldemo/test-demos/

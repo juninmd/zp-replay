@@ -1,0 +1,16 @@
+[package]
+name = "zp-replay-wasm"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# vendored copy with a one-line macro fix for current rustc (see ../vendor/hldemo)
+hldemo = { path = "../vendor/hldemo" }
+
+[profile.release]
+opt-level = "s"
+lto = true

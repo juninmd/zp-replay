@@ -1,0 +1,53 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "zp-replay-poc",
+      "dependencies": {
+        "@cgdangelo/talent-parser-goldsrc": "0.1.5",
+        "three": "0.186.1",
+      },
+      "devDependencies": {
+        "@types/three": "0.186.0",
+      },
+    },
+  },
+  "packages": {
+    "@babel/code-frame": ["@babel/code-frame@7.29.7", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.29.7", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw=="],
+
+    "@babel/helper-validator-identifier": ["@babel/helper-validator-identifier@7.29.7", "", {}, "sha512-qehxGkRj55h/ff8EMaJ+cYhyaKlHIxqYDn682wQD7RNp9UujOQsHog2uS0r2vzr4pW+sXf90NeeayjcNaX3fFg=="],
+
+    "@cgdangelo/talent-parser": ["@cgdangelo/talent-parser@0.1.5", "", { "dependencies": { "fp-ts": "~2.16.5", "parser-ts": "~0.7.0" } }, "sha512-pGOSr/xPnRt8flBUdVpEPZ3w1G0iaaGj2hBnFSl0iKZJCO3spqsJqxg3nIj90DcFgBnPOaBiYbjugAnFwGIj/Q=="],
+
+    "@cgdangelo/talent-parser-bitbuffer": ["@cgdangelo/talent-parser-bitbuffer@0.1.5", "", { "dependencies": { "@cgdangelo/talent-parser": "0.1.5", "fp-ts": "~2.16.5" } }, "sha512-AZCuoRA8BK9OjyWLzS0HXwy6Hxb4eMJdkWUzHvVmqF7nbsZbkmELWZDUTmKkMs95qmh9G1vDjivdMN2a2StbLA=="],
+
+    "@cgdangelo/talent-parser-buffer": ["@cgdangelo/talent-parser-buffer@0.1.5", "", { "dependencies": { "@cgdangelo/talent-parser": "0.1.5", "fp-ts": "~2.16.5" } }, "sha512-oD9DLhuaPR0RfhWNIHaWo0PDlgvd1VakGsFKXGiMinCrTnjw/n0zVMH8JSkfAC+Fze4LK1xrkiBt2mU2hh2Yyg=="],
+
+    "@cgdangelo/talent-parser-goldsrc": ["@cgdangelo/talent-parser-goldsrc@0.1.5", "", { "dependencies": { "@cgdangelo/talent-parser": "0.1.5", "@cgdangelo/talent-parser-bitbuffer": "0.1.5", "@cgdangelo/talent-parser-buffer": "0.1.5", "fp-ts": "~2.16.5" } }, "sha512-CA3teMi/GJpKAeTE7ffhbnoYvaPZuXEffPXZZyI9ZXJoVS2SQCTNhdVOU2BdBBK95Od/ViEV4T/VstaVRF79Aw=="],
+
+    "@dimforge/rapier3d-compat": ["@dimforge/rapier3d-compat@0.12.0", "", {}, "sha512-uekIGetywIgopfD97oDL5PfeezkFpNhwlzlaEYNOA0N6ghdsOvh/HYjSMek5Q2O1PYvRSDFcqFVJl4r4ZBwOow=="],
+
+    "@tweenjs/tween.js": ["@tweenjs/tween.js@23.1.3", "", {}, "sha512-vJmvvwFxYuGnF2axRtPYocag6Clbb5YS7kLL+SO/TeVFzHqDIWrNKYtcsPMibjDx9O+bu+psAy9NKfWklassUA=="],
+
+    "@types/stats.js": ["@types/stats.js@0.17.4", "", {}, "sha512-jIBvWWShCvlBqBNIZt0KAshWpvSjhkwkEu4ZUcASoAvhmrgAUI2t1dXrjSL4xXVLB4FznPrIsX3nKXFl/Dt4vA=="],
+
+    "@types/three": ["@types/three@0.186.0", "", { "dependencies": { "@dimforge/rapier3d-compat": "~0.12.0", "@tweenjs/tween.js": "~23.1.3", "@types/stats.js": "*", "@types/webxr": ">=0.5.17", "fflate": "~0.8.3", "meshoptimizer": "~1.1.1" } }, "sha512-mxYSBpDC+D0pLfSP6sW4WZTcT+nrtmZcimMqnVmy36Hte3XpeYSrvgg4TRdaM1GemGog1AWzI5qL2VoIfMXbJQ=="],
+
+    "@types/webxr": ["@types/webxr@0.5.24", "", {}, "sha512-h8fgEd/DpoS9CBrjEQXR+dIDraopAEfu4wYVNY2tEPwk60stPWhvZMf4Foo5FakuQ7HFZoa8WceaWFervK2Ovg=="],
+
+    "fflate": ["fflate@0.8.3", "", {}, "sha512-tbZNuJrLwGUp3zshBtdy4W+ORxZuIh8a5ilyIEQDC5rY1f3U20JMry0Ll3WBzU58EZKsEuJFXhb5gwv8CsPvgA=="],
+
+    "fp-ts": ["fp-ts@2.16.11", "", {}, "sha512-LaI+KaX2NFkfn1ZGHoKCmcfv7yrZsC3b8NtWsTVQeHkq4F27vI5igUuO53sxqDEa2gNQMHFPmpojDw/1zmUK7w=="],
+
+    "js-tokens": ["js-tokens@4.0.0", "", {}, "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="],
+
+    "meshoptimizer": ["meshoptimizer@1.1.1", "", {}, "sha512-oRFNWJRDA/WTrVj7NWvqa5HqE1t9MYDj2VaWirQCzCCrAd2GHrqR/sQezCxiWATPNlKTcRaPRHPJwIRoPBAp5g=="],
+
+    "parser-ts": ["parser-ts@0.7.0", "", { "dependencies": { "@babel/code-frame": "^7.0.0" }, "peerDependencies": { "fp-ts": "^2.14.0" } }, "sha512-YBJYgQ6j2DiKryKkYUrw0a7WiUb2DGnanffFZNz5cRTaoTncSxjKCio6ocEBSAa26jFXr0XSNjaYXUrL61BISA=="],
+
+    "picocolors": ["picocolors@1.1.1", "", {}, "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="],
+
+    "three": ["three@0.186.1", "", {}, "sha512-blFeqb49wRCSGUGj7gtpfnSGHy2lwDk94RhUmS1c/hTby70kvChbWpkJ4Pm1390LqzzvTmzgXKHPEafJwCb8jA=="],
+  }
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>zp-replay PoC</title>
+  <style>
+    :root { --bg: #f5f5f4; --fg: #1c1917; --muted: #78716c; --accent: #b45309; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --bg: #1c1917; --fg: #f5f5f4; --muted: #a8a29e; --accent: #fbbf24; }
+    }
+    :root[data-theme="dark"] { --bg: #1c1917; --fg: #f5f5f4; --muted: #a8a29e; --accent: #fbbf24; }
+    body { margin: 0; padding: 16px; background: var(--bg); color: var(--fg); font: 15px system-ui, sans-serif; }
+    h1 { font-size: 18px; margin: 0 0 12px; }
+    input[type="file"] { max-width: 100%; }
+    canvas { display: block; width: 100%; max-width: 640px; aspect-ratio: 1; background: var(--bg); border: 1px solid var(--muted); margin-top: 12px; }
+    #status { color: var(--muted); margin: 8px 0; min-height: 1.2em; }
+    input[type="range"] { width: 100%; max-width: 640px; }
+  </style>
+</head>
+<body>
+  <h1>zp-replay PoC: posição do gravador a partir de um .dem</h1>
+  <input id="file" type="file" accept=".dem">
+  <div id="status">Escolha um arquivo .dem. O parse roda neste navegador; nada é enviado.</div>
+  <canvas id="view" width="640" height="640"></canvas>
+  <div><input id="scrub" type="range" min="0" max="0" value="0" step="1" disabled></div>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

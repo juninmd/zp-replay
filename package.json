@@ -1,0 +1,17 @@
+{
+  "name": "zp-replay-poc",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:wasm": "cargo build --release --target wasm32-unknown-unknown --manifest-path crate/Cargo.toml && bun -e \"require('fs').copyFileSync('crate/target/wasm32-unknown-unknown/release/zp_replay_wasm.wasm','web/zp_replay_wasm.wasm')\"",
+    "test": "bun test",
+    "serve": "bun scripts/serve.ts"
+  },
+  "dependencies": {
+    "@cgdangelo/talent-parser-goldsrc": "0.1.5",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@types/three": "0.186.0"
+  }
+}
