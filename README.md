@@ -39,6 +39,21 @@ mostrou `t=0.00s x=484 y=318 (1/288)`; captura em `poc-screenshot.png`.
 O `basic.dem` é um fixture de teste do próprio `hldemo` (upstream), não dado de
 projeto. Não o use em publicações.
 
+## Viewer 3D do mapa (`web/map.html`)
+
+Além da PoC em canvas 2D (`web/index.html`), há um viewer Three.js que carrega um mapa BSP
+e os trajetos de um replay. Os dados são locais e ficam fora do git:
+
+```
+bun install
+bun run build:web                              # gera web/map-app.js (gitignored)
+bun scripts/extract-replay.ts <demo.dem> local-replays/<nome>.json
+cp <de_dust2.bsp> local-maps/                  # asset do jogo, não versionado
+bun scripts/serve.ts                           # http://localhost:8080/map.html?replay=<nome>.json
+```
+
+Observação: `parse.test.ts` depende do `.wasm` (`bun run build:wasm`); sem ele esse teste falha.
+
 ## Próximos passos (se a direção for adiante)
 
 1. Decoder de `svc_packetentities` para ter posições de todos os jogadores e bots.

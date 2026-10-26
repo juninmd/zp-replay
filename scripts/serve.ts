@@ -8,7 +8,12 @@ const port = Number(process.env.PORT ?? 8080);
 Bun.serve({
   port,
   async fetch(req) {
-    const path = decodeURIComponent(new URL(req.url).pathname);
+    let path: string;
+    try {
+      path = decodeURIComponent(new URL(req.url).pathname);
+    } catch {
+      return new Response("bad path", { status: 400 }); // malformed %-escape
+    }
     if (path.startsWith("/replays/")) {
       const name = path.slice("/replays/".length);
       if (!/^[A-Za-z0-9_.-]+\.json$/.test(name)) return new Response("bad name", { status: 400 });
