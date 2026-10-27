@@ -47,6 +47,7 @@ e os trajetos de um replay. Os dados são locais e ficam fora do git:
 ```
 bun install
 bun run build:web                              # gera web/map-app.js (gitignored)
+mkdir -p local-replays local-maps              # pastas locais, gitignored
 bun scripts/extract-replay.ts <demo.dem> local-replays/<nome>.json
 cp <de_dust2.bsp> local-maps/                  # asset do jogo, não versionado
 bun scripts/serve.ts                           # http://localhost:8080/map.html?replay=<nome>.json
