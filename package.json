@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "build:wasm": "cargo build --release --target wasm32-unknown-unknown --manifest-path crate/Cargo.toml && bun -e \"require('fs').copyFileSync('crate/target/wasm32-unknown-unknown/release/zp_replay_wasm.wasm','web/zp_replay_wasm.wasm')\"",
+    "build:web": "bun build web/src/map-app.ts --outfile web/map-app.js",
+    "pretest": "rustup target add wasm32-unknown-unknown && bun run build:wasm",
     "test": "bun test",
     "serve": "bun scripts/serve.ts"
   },
