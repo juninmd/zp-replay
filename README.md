@@ -1,5 +1,9 @@
 # zp-replay PoC
 
+<p align="center">
+  <img src="docs/readme/hero.png" alt="Illustrative banner for zp-replay PoC (mockup with fictitious data)" width="100%">
+</p>
+
 **Abrir um demo GoldSrc (`.dem`) no navegador e desenhar a trajetória do jogador que gravou.**
 
 O parse roda no cliente via WebAssembly, então o arquivo não sai da máquina. Há também um
@@ -155,6 +159,24 @@ O parse do viewer 2D acontece no navegador; nada é enviado. O JSON gerado pelo 
 contém apenas nome do mapa, `maxPlayers`, trilhas de posição e a POV — **não contém nomes,
 SteamID nem chat**, porque o extrator não lê esses campos. O demo original, claro, pode
 conter tudo isso; ele continua sendo seu arquivo.
+
+## Screenshots
+
+> [!NOTE]
+> **Illustrative mockups.** The screens below were rendered from HTML with fictitious data (Playwright). They are not captures of a real installation.
+
+<p align="center">
+  <img src="docs/readme/viewer.png" alt="Demo viewer — illustrative mockup with fictitious data" width="100%">
+  <br>
+  <sub>Demo viewer — fictitious data.</sub>
+</p>
+
+<p align="center">
+  <img src="docs/readme/parse.png" alt="Client-side parse — illustrative mockup with fictitious data" width="100%">
+  <br>
+  <sub>Client-side parse — fictitious data.</sub>
+</p>
+
 
 ## Limitações e próximos passos
 
