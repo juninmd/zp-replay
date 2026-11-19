@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { forwardFromAngles, parseAngles, toThree } from "../web/src/coords";
+import { forwardFromAngles, parseAngles, parseVec3, toThree } from "../web/src/coords";
 
 // Expected values use the Quake/GoldSrc convention: yaw 0 looks along +X,
 // yaw 90 along +Y, and positive pitch looks down. Checked against the spawn
@@ -35,5 +35,16 @@ describe("view angles", () => {
   test("parseAngles reads pitch yaw roll and tolerates a missing key", () => {
     expect(parseAngles("0 255 0")).toEqual([0, 255, 0]);
     expect(parseAngles(undefined)).toEqual([0, 0, 0]);
+  });
+});
+
+describe("parseVec3", () => {
+  test("tolerates repeated whitespace instead of producing NaN", () => {
+    expect(parseVec3("  100   -200 \t 30 ")).toEqual([100, -200, 30]);
+  });
+
+  test("missing or non-numeric parts become 0", () => {
+    expect(parseVec3(undefined)).toEqual([0, 0, 0]);
+    expect(parseVec3("5 abc")).toEqual([5, 0, 0]);
   });
 });

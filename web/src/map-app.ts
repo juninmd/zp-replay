@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { parseBsp } from "./bsp";
-import { forwardFromAngles, parseAngles, toThree } from "./coords";
+import { forwardFromAngles, parseAngles, parseVec3, toThree } from "./coords";
 import { buildMeshData } from "./geometry";
 import type { ReplayData } from "./demo/tracks";
 import { durationOf } from "./demo/playback";
@@ -169,7 +169,7 @@ async function main() {
   spawns = map.entities
     .filter((e) => e.classname === "info_player_start" || e.classname === "info_player_deathmatch")
     .map((e) => {
-      const [x, y, z] = (e.origin ?? "0 0 0").split(" ").map(Number);
+      const [x, y, z] = parseVec3(e.origin);
       const [pitch, yaw, roll] = parseAngles(e.angles);
       return { origin: new THREE.Vector3(...toThree([x, y, z])), angles: [pitch, yaw, roll] as [number, number, number] };
     });
@@ -177,7 +177,15 @@ async function main() {
   spawns.forEach((_, i) => spawnSelect.add(new Option(`Spawn ${i + 1}`, String(i))));
 
   const replayName = new URLSearchParams(location.search).get("replay");
-  if (replayName) await loadReplay(replayName);
+  if (replayName) {
+    // A missing replay must not take down the map viewer that is already loaded.
+    try {
+      await loadReplay(replayName);
+    } catch (err) {
+      replayView = null;
+      status.textContent = `Erro ao carregar replay: ${(err as Error).message}`;
+    }
+  }
 
   resize();
   window.addEventListener("resize", resize);
@@ -198,7 +206,7 @@ async function main() {
     renderer.render(scene, mode === "overview" ? ortho : perspective);
   });
   status.dataset.ready = "1";
-  status.textContent = describe();
+  if (!status.textContent?.startsWith("Erro")) status.textContent = describe();
   console.info(`faces=${map.faces.length} triangles=${mesh.triangles} spawns=${spawns.length}`);
 }
 
