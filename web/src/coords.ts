@@ -18,8 +18,15 @@ export function forwardFromAngles(pitchDeg: number, yawDeg: number): Vec3 {
   return toThree([gx, gy, gz]);
 }
 
+// Parses a space-separated BSP entity vector such as `origin` or `angles`.
+// Splits on any whitespace run and maps missing or non-numeric parts to 0, so a
+// stray double space never turns the whole vector into NaN.
+export function parseVec3(text: string | undefined): Vec3 {
+  const parts = (text ?? "").trim().split(/\s+/).map(Number);
+  return [parts[0] || 0, parts[1] || 0, parts[2] || 0];
+}
+
 // Parses "pitch yaw roll" from a BSP entity key such as `angles`.
 export function parseAngles(text: string | undefined): Vec3 {
-  const parts = (text ?? "0 0 0").trim().split(/\s+/).map(Number);
-  return [parts[0] || 0, parts[1] || 0, parts[2] || 0];
+  return parseVec3(text);
 }
