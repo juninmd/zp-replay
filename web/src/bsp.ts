@@ -101,10 +101,15 @@ export function parseBsp(buffer: ArrayBuffer): BspMap {
   ];
 
   const texCount = textures.length >= 4 ? view.getInt32(textures.offset, true) : 0;
+  if (texCount < 0 || 4 + texCount * 4 > textures.length) throw new Error("BSP texture directory out of range");
   const texNames: string[] = [];
   for (let i = 0; i < texCount; i++) {
     const rel = view.getInt32(textures.offset + 4 + i * 4, true);
-    texNames.push(rel < 0 ? "" : readName(bytes, textures.offset + rel));
+    texNames.push(rel < 0 || rel >= textures.length ? "" : readName(bytes, textures.offset + rel));
+  }
+
+  if (world.firstFace < 0 || world.numFaces < 0 || (world.firstFace + world.numFaces) * SIZE_FACE > faces.length) {
+    throw new Error("BSP world faces out of range");
   }
 
   const out: BspFace[] = [];
@@ -113,8 +118,14 @@ export function parseBsp(buffer: ArrayBuffer): BspMap {
     const firstEdge = view.getInt32(at + 4, true);
     const numEdges = view.getInt16(at + 8, true);
     const texInfoIndex = view.getInt16(at + 10, true);
+    if (texInfoIndex < 0 || (texInfoIndex + 1) * SIZE_TEXINFO > texinfo.length) {
+      throw new Error(`texinfo index out of range in face ${f}`);
+    }
     const texIdx = view.getInt32(texinfo.offset + texInfoIndex * SIZE_TEXINFO + 32, true);
     const texName = texNames[texIdx] ?? "";
+    // A polygon needs at least 3 vertices; skip degenerate faces instead of crashing on a negative array size.
+    if (numEdges < 3) continue;
+    if (firstEdge < 0) throw new Error(`surfedge index out of range in face ${f}`);
 
     // Walk the face's surface edges into a vertex loop, then fan-triangulate it.
     const loop: number[] = [];
