@@ -60,8 +60,19 @@ function resize() {
   ortho.updateProjectionMatrix();
 }
 
+const modeButtons: Record<Mode, HTMLButtonElement | null> = {
+  overview: document.getElementById("mode-overview") as HTMLButtonElement | null,
+  orbit: document.getElementById("mode-orbit") as HTMLButtonElement | null,
+  first: document.getElementById("mode-first") as HTMLButtonElement | null,
+  pov: povBtn,
+};
+
 function setMode(next: Mode) {
   mode = next;
+  // Toggle buttons expose which camera is active (the canvas alone says nothing to AT).
+  for (const [name, button] of Object.entries(modeButtons)) {
+    button?.setAttribute("aria-pressed", String(name === next));
+  }
   orbit.enabled = next === "overview" || next === "orbit";
   if (next === "overview") {
     ortho.position.set(mapCenter.x, mapCenter.y + mapRadius * 2, mapCenter.z);
@@ -140,9 +151,9 @@ function describe(): string {
   return `1ª pessoa no spawn ${Number(spawnSelect.value) + 1}/${spawns.length} (altura dos olhos assumida: ${EYE_HEIGHT})`;
 }
 
-document.getElementById("mode-overview")?.addEventListener("click", () => setMode("overview"));
-document.getElementById("mode-orbit")?.addEventListener("click", () => setMode("orbit"));
-document.getElementById("mode-first")?.addEventListener("click", () => setMode("first"));
+modeButtons.overview?.addEventListener("click", () => setMode("overview"));
+modeButtons.orbit?.addEventListener("click", () => setMode("orbit"));
+modeButtons.first?.addEventListener("click", () => setMode("first"));
 spawnSelect.addEventListener("change", () => { if (mode === "first") setMode("first"); });
 
 async function main() {

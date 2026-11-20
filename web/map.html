@@ -14,6 +14,7 @@
     h1 { font-size: 18px; margin: 0 0 12px; }
     .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
     button, select { font: inherit; padding: 6px 10px; }
+    button[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 1px; font-weight: 600; }
     #status { color: var(--muted); margin: 6px 0; min-height: 1.2em; }
     #view { width: 100%; max-width: 900px; aspect-ratio: 4 / 3; border: 1px solid var(--muted); }
     #view canvas { display: block; width: 100%; height: 100%; }
@@ -21,11 +22,11 @@
 </head>
 <body>
   <h1>de_dust2: mapa e visão em primeira pessoa</h1>
-  <div class="bar">
-    <button id="mode-overview" type="button">Visão geral</button>
-    <button id="mode-orbit" type="button">3D livre</button>
-    <button id="mode-first" type="button">1ª pessoa</button>
-    <button id="mode-pov" type="button" disabled>Visão da demo</button>
+  <div class="bar" role="group" aria-label="Câmera">
+    <button id="mode-overview" type="button" aria-pressed="false">Visão geral</button>
+    <button id="mode-orbit" type="button" aria-pressed="false">3D livre</button>
+    <button id="mode-first" type="button" aria-pressed="false">1ª pessoa</button>
+    <button id="mode-pov" type="button" aria-pressed="false" disabled>Visão da demo</button>
     <select id="spawn" aria-label="Spawn"></select>
   </div>
   <div class="bar">
@@ -33,7 +34,7 @@
     <input id="time" type="range" min="0" max="0" value="0" step="0.1" disabled aria-label="Tempo">
     <span id="clock"></span>
   </div>
-  <div id="status">Carregando mapa...</div>
+  <div id="status" role="status">Carregando mapa...</div>
   <div id="view"></div>
   <script type="module" src="map-app.js"></script>
 </body>
