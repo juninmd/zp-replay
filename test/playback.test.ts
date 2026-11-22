@@ -22,6 +22,17 @@ describe("positionAt", () => {
     expect(positionAt(track, 4 + STALE_AFTER_S + 0.1)).toBeNull();
   });
 
+  test("does not interpolate across a gap longer than the stale window", () => {
+    const gap = [
+      { t: 0, x: 0, y: 0, z: 0 },
+      { t: 100, x: 10000, y: 0, z: 0 },
+    ];
+    expect(positionAt(gap, 1)).toEqual([0, 0, 0]);
+    expect(positionAt(gap, 4.9)).toEqual([0, 0, 0]);
+    expect(positionAt(gap, 50)).toBeNull();
+    expect(positionAt(gap, 100)).toEqual([10000, 0, 0]);
+  });
+
   test("an empty track is never visible", () => {
     expect(positionAt([], 1)).toBeNull();
   });

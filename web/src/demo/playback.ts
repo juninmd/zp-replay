@@ -22,7 +22,9 @@ export function positionAt(samples: Sample[], t: number): Vec3 | null {
   const a = samples[lo];
   if (t - a.t > STALE_AFTER_S) return null;
   const b = samples[lo + 1];
-  if (!b || b.t === a.t) return [a.x, a.y, a.z];
+  // A gap longer than the stale window means the player left and came back elsewhere:
+  // hold the old spot (then go null) instead of sliding across the map toward the new one.
+  if (!b || b.t === a.t || b.t - a.t > STALE_AFTER_S) return [a.x, a.y, a.z];
 
   const k = (t - a.t) / (b.t - a.t);
   return [a.x + (b.x - a.x) * k, a.y + (b.y - a.y) * k, a.z + (b.z - a.z) * k];
